@@ -1,207 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donut Essentials</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Donut Essentials</title>
 
-  <style>
-    :root {
-      --bg1: #120606;
-      --bg2: #250b08;
-      --red: #ff4d2e;
-      --orange: #ff9a2f;
-      --text: #fff6ef;
-      --glass: rgba(255, 255, 255, 0.08);
-      --border: rgba(255, 170, 90, 0.2);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-    }
+<style>
+:root{
+  --bg1:#120606;
+  --bg2:#250b08;
+  --red:#ff4d2e;
+  --orange:#ff9a2f;
+  --text:#fff6ef;
+  --glass:rgba(255,255,255,0.08);
+  --border:rgba(255,170,90,0.2);
+  --shadow:0 20px 60px rgba(0,0,0,0.45);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+*{box-sizing:border-box;}
 
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: system-ui, sans-serif;
-      color: var(--text);
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:system-ui,sans-serif;
+  color:var(--text);
 
-      /* SIMPLE CLEAN RED/ORANGE BACKGROUND */
-      background: linear-gradient(
-        135deg,
-        #120606 0%,
-        #1f0706 45%,
-        #2a0a08 100%
-      );
-    }
+  /* ONLY RED / ORANGE BACKGROUND */
+  background:linear-gradient(
+    135deg,
+    #120606 0%,
+    #1f0706 50%,
+    #2a0a08 100%
+  );
+}
 
-    /* particles only */
-    #sparks {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      display: block;
-    }
+#sparks{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  display:block;
+}
 
-    .wrap {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
+.wrap{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
 
-    .card {
-      width: min(720px, 100%);
-      text-align: center;
-      padding: 48px 28px;
-      border-radius: 28px;
-      border: 1px solid var(--border);
-      background: var(--glass);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      animation: float 5s ease-in-out infinite;
-    }
+.card{
+  width:min(720px,100%);
+  text-align:center;
+  padding:48px 28px;
+  border-radius:28px;
+  border:1px solid var(--border);
+  background:var(--glass);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+}
 
-    .title {
-      margin: 0;
-      font-size: clamp(2.2rem, 8vw, 5rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: linear-gradient(
-        180deg,
-        #fff8f1 0%,
-        #ffcf9b 25%,
-        #ff8a3d 60%,
-        #ff4d2e 100%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+.title{
+  margin:0;
+  font-size:clamp(2.2rem,8vw,5rem);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
 
-    .subtitle {
-      margin: 14px 0 0;
-      letter-spacing: 0.22em;
-      opacity: 0.7;
-      text-transform: uppercase;
-    }
+  /* ONLY RED + ORANGE TEXT */
+  background:linear-gradient(
+    180deg,
+    #fff8f1,
+    #ff8a3d,
+    #ff4d2e
+  );
 
-    .button {
-      margin-top: 28px;
-      padding: 16px 34px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: white;
-      background: linear-gradient(135deg, var(--red), var(--orange));
-      box-shadow: 0 12px 30px rgba(255, 84, 46, 0.35);
-      transition: 0.2s;
-    }
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
 
-    .button:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
+.subtitle{
+  margin:14px 0 0;
+  letter-spacing:0.22em;
+  opacity:0.7;
+  text-transform:uppercase;
+}
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-  </style>
+.button{
+  margin-top:28px;
+  padding:16px 34px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:white;
+
+  /* ONLY RED / ORANGE BUTTON */
+  background:linear-gradient(135deg,var(--red),var(--orange));
+
+  box-shadow:0 12px 30px rgba(255,84,46,0.35);
+  transition:0.2s;
+}
+
+.button:hover{
+  transform:translateY(-2px) scale(1.02);
+}
+</style>
 </head>
 
 <body>
-  <canvas id="sparks"></canvas>
 
-  <main class="wrap">
-    <section class="card">
-      <h1 class="title">Donut Essentials</h1>
-      <p class="subtitle">Clean • Fast • Simple</p>
-      <button class="button"
-        onclick="location.href='https://metalfungas.github.io/donutessentials/downloads/'">
-        Enter
-      </button>
-    </section>
-  </main>
+<canvas id="sparks"></canvas>
 
-  <script>
-    const canvas = document.getElementById("sparks");
-    const ctx = canvas.getContext("2d");
+<div class="wrap">
+  <div class="card">
+    <h1 class="title">Donut Essentials</h1>
+    <p class="subtitle">Clean • Fast • Simple</p>
 
-    let w, h, particles = [];
+    <button class="button"
+      onclick="location.href='https://metalfungas.github.io/donutessentials/downloads/'">
+      Enter
+    </button>
+  </div>
+</div>
 
-    function resize() {
-      w = canvas.width = window.innerWidth * devicePixelRatio;
-      h = canvas.height = window.innerHeight * devicePixelRatio;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-    }
+<script>
+const canvas = document.getElementById("sparks");
+const ctx = canvas.getContext("2d");
 
-    function rand(min, max) {
-      return Math.random() * (max - min) + min;
-    }
+let w,h,particles=[];
 
-    function createParticle() {
-      const angle = rand(0, Math.PI * 2);
-      const speed = rand(0.2, 1.2) * devicePixelRatio;
+function resize(){
+  w = canvas.width = innerWidth * devicePixelRatio;
+  h = canvas.height = innerHeight * devicePixelRatio;
+  canvas.style.width = innerWidth + "px";
+  canvas.style.height = innerHeight + "px";
+}
 
-      return {
-        x: rand(0, w),
-        y: rand(0, h),
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        r: rand(0.8, 2.2) * devicePixelRatio,
-        life: rand(80, 200),
-        hue: rand(10, 35)
-      };
-    }
+function rand(min,max){
+  return Math.random()*(max-min)+min;
+}
 
-    function init() {
-      particles = [];
-      const count = Math.floor((window.innerWidth * window.innerHeight) / 14000);
-      for (let i = 0; i < count; i++) particles.push(createParticle());
-    }
+function createParticle(){
+  const angle = rand(0,Math.PI*2);
+  const speed = rand(0.2,1.2) * devicePixelRatio;
 
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
+  return {
+    x:rand(0,w),
+    y:rand(0,h),
+    vx:Math.cos(angle)*speed,
+    vy:Math.sin(angle)*speed,
+    r:rand(0.8,2.2)*devicePixelRatio,
+    life:rand(80,200),
+    hue:rand(10,28) /* ONLY RED → ORANGE RANGE */
+  };
+}
 
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life--;
+function init(){
+  particles=[];
+  const count=Math.floor((innerWidth*innerHeight)/14000);
+  for(let i=0;i<count;i++) particles.push(createParticle());
+}
 
-        if (p.life <= 0) Object.assign(p, createParticle());
+function draw(){
+  ctx.clearRect(0,0,w,h);
 
-        const alpha = Math.max(0, p.life / 200);
+  for(const p of particles){
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.life--;
 
-        ctx.beginPath();
-        ctx.fillStyle = `hsla(${p.hue}, 100%, 60%, ${alpha})`;
-        ctx.shadowColor = `hsla(${p.hue}, 100%, 60%, ${alpha})`;
-        ctx.shadowBlur = 10;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    if(p.life<=0) Object.assign(p,createParticle());
 
-      requestAnimationFrame(draw);
-    }
+    const alpha=Math.max(0,p.life/200);
 
-    window.addEventListener("resize", () => {
-      resize();
-      init();
-    });
+    ctx.beginPath();
+    ctx.fillStyle=`hsla(${p.hue},100%,60%,${alpha})`;
+    ctx.shadowColor=`hsla(${p.hue},100%,60%,${alpha})`;
+    ctx.shadowBlur=10;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  }
 
-    resize();
-    init();
-    draw();
-  </script>
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener("resize",()=>{
+  resize();
+  init();
+});
+
+resize();
+init();
+draw();
+</script>
+
 </body>
 </html>
