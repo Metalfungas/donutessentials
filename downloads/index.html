@@ -40,14 +40,14 @@ canvas{
   z-index:2;
   height:100%;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   padding:20px;
 }
 
 .card{
-  width:min(820px,100%);
-  padding:42px;
+  width:min(1000px,100%);
+  padding:40px;
   border-radius:24px;
   border:1px solid var(--border);
   backdrop-filter:blur(14px);
@@ -56,7 +56,7 @@ canvas{
 }
 
 h1{
-  margin:0 0 10px;
+  margin:0;
   font-size:3rem;
   background:linear-gradient(90deg,var(--orange),var(--red));
   -webkit-background-clip:text;
@@ -69,32 +69,37 @@ h1{
   margin-bottom:20px;
 }
 
+/* GRID CARDS */
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
 }
 
-.btn{
-  padding:14px;
-  border:none;
-  border-radius:14px;
+.mod{
+  border-radius:18px;
+  overflow:hidden;
   cursor:pointer;
-  font-weight:700;
-  letter-spacing:0.08em;
-  color:white;
-  background:linear-gradient(135deg,var(--red),var(--orange));
+  border:1px solid var(--border);
+  background:rgba(0,0,0,0.25);
   transition:0.2s;
-  box-shadow:0 10px 25px rgba(255,80,40,0.25);
 }
 
-.btn:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.1);
+.mod:hover{
+  transform:translateY(-4px);
 }
 
-.btn:active{
-  transform:scale(0.98);
+.mod img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  display:block;
+}
+
+.mod .info{
+  padding:12px;
+  font-weight:700;
 }
 
 /* LOADING BAR */
@@ -103,27 +108,20 @@ h1{
   bottom:0;
   left:0;
   width:100%;
-  height:6px;
+  height:7px;
   background:rgba(255,255,255,0.06);
   z-index:5;
-  overflow:hidden;
 }
 
 .bar{
   height:100%;
-  width:40%;
+  width:0%;
   background:linear-gradient(90deg,var(--red),var(--orange));
   box-shadow:0 0 20px rgba(255,120,40,0.6);
-  animation:load 2s infinite ease-in-out;
+  transition:width 0.1s linear;
 }
 
-@keyframes load{
-  0%{transform:translateX(-100%);}
-  50%{transform:translateX(150%);}
-  100%{transform:translateX(-100%);}
-}
-
-@media(max-width:600px){
+@media(max-width:800px){
   .grid{grid-template-columns:1fr;}
 }
 </style>
@@ -139,59 +137,108 @@ h1{
     <div class="sub">DONUT ESSENTIALS</div>
 
     <div class="grid">
-      <button class="btn" onclick="window.location.href='file1.zip'">Download 1</button>
-      <button class="btn" onclick="window.location.href='file2.zip'">Download 2</button>
-      <button class="btn" onclick="window.location.href='file3.zip'">Download 3</button>
-      <button class="btn" onclick="window.location.href='file4.zip'">Download 4</button>
-      <button class="btn" onclick="window.location.href='file5.zip'">Download 5</button>
+
+      <div class="mod" onclick="downloadFile('file1.zip')">
+        <img src="https://picsum.photos/400/200?1">
+        <div class="info">PvP Pack</div>
+      </div>
+
+      <div class="mod" onclick="downloadFile('file2.zip')">
+        <img src="https://picsum.photos/400/200?2">
+        <div class="info">FPS Boost</div>
+      </div>
+
+      <div class="mod" onclick="downloadFile('file3.zip')">
+        <img src="https://picsum.photos/400/200?3">
+        <div class="info">Client Mods</div>
+      </div>
+
+      <div class="mod" onclick="downloadFile('file4.zip')">
+        <img src="https://picsum.photos/400/200?4">
+        <div class="info">HUD Pack</div>
+      </div>
+
+      <div class="mod" onclick="downloadFile('file5.zip')">
+        <img src="https://picsum.photos/400/200?5">
+        <div class="info">Utility Mods</div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<div class="loader"><div class="bar"></div></div>
+<!-- loading bar -->
+<div class="loader"><div class="bar" id="bar"></div></div>
 
 <script>
+const bar = document.getElementById("bar");
+
+function downloadFile(file){
+  let progress = 0;
+  bar.style.width = "0%";
+
+  // fake progress animation
+  const interval = setInterval(() => {
+    progress += Math.random()*12;
+    if(progress >= 100){
+      progress = 100;
+      clearInterval(interval);
+
+      // trigger real download
+      const a = document.createElement("a");
+      a.href = file;
+      a.download = file;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(()=> bar.style.width="0%", 600);
+    }
+
+    bar.style.width = progress + "%";
+  }, 80);
+}
+
+/* sparks background */
 const c=document.getElementById("sparks");
 const ctx=c.getContext("2d");
 
-let w,h,particles=[];
+let w,h,p=[];
 
 function resize(){
   w=c.width=innerWidth;
   h=c.height=innerHeight;
 }
 
-function spark(){
+function s(){
   return{
     x:Math.random()*w,
     y:Math.random()*h,
     vx:(Math.random()-0.5)*1.2,
     vy:(Math.random()-0.5)*1.2,
-    r:Math.random()*2+0.5,
-    life:100+Math.random()*120
+    r:Math.random()*2
   };
 }
 
 function init(){
-  particles=[];
-  for(let i=0;i<90;i++) particles.push(spark());
+  p=[];
+  for(let i=0;i<80;i++) p.push(s());
 }
 
 function draw(){
   ctx.clearRect(0,0,w,h);
 
-  for(let p of particles){
-    p.x+=p.vx;
-    p.y+=p.vy;
-    p.life--;
+  for(let i of p){
+    i.x+=i.vx;
+    i.y+=i.vy;
 
-    if(p.life<=0){
-      Object.assign(p,spark());
+    if(i.x<0||i.x>w||i.y<0||i.y>h){
+      Object.assign(i,s());
     }
 
+    ctx.fillStyle="rgba(255,140,60,0.7)";
     ctx.beginPath();
-    ctx.fillStyle="rgba(255,140,60,0.8)";
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.arc(i.x,i.y,i.r,0,Math.PI*2);
     ctx.fill();
   }
 
