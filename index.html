@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donut Essentials</title>
+  <style>
+    :root {
+      --bg1: #120606;
+      --bg2: #250b08;
+      --red: #ff4d2e;
+      --orange: #ff9a2f;
+      --text: #fff6ef;
+      --glass: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 170, 90, 0.2);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 154, 47, 0.14), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(255, 77, 46, 0.12), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+    }
+
+    #sparks {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, transparent 0 45%, rgba(0,0,0,0.28) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      opacity: 0.06;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.25) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: screen;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      text-align: center;
+      padding: 48px 28px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transform: translateY(0);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(2.2rem, 8vw, 5rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+      background: linear-gradient(180deg, #fff8f1 0%, #ffcf9b 30%, #ff8a3d 70%, #ff4d2e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255, 120, 40, 0.18);
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 240, 230, 0.7);
+    }
+
+    .button {
+      margin-top: 28px;
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 16px 34px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      box-shadow:
+        0 12px 30px rgba(255, 84, 46, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 35%);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 16px 36px rgba(255, 84, 46, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+      filter: brightness(1.05);
+    }
+
+    .button:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .glow {
+      position: absolute;
+      inset: auto 50% 18% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      transform: translateX(50%);
+      background: radial-gradient(circle, rgba(255, 123, 40, 0.18), transparent 65%);
+      filter: blur(10px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        padding: 38px 20px;
+        border-radius: 22px;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="sparks"></canvas>
+  <div class="glow"></div>
+  <div class="vignette"></div>
+  <div class="noise"></div>
+
+  <main class="wrap">
+    <section class="card">
+      <h1 class="title">Donut Essentials</h1>
+      <p class="subtitle">Clean • Fast • Simple</p>
+      <button class="button" onclick="location.href='#'">Enter</button>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("sparks");
+    const ctx = canvas.getContext("2d");
+
+    let w, h, particles = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth * devicePixelRatio;
+      h = canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+    }
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createParticle() {
+      const angle = rand(0, Math.PI * 2);
+      const speed = rand(0.2, 1.2) * devicePixelRatio;
+      return {
+        x: rand(0, w),
+        y: rand(0, h),
+        vx: Math.cos(angle) * speed * rand(0.3, 1.4),
+        vy: Math.sin(angle) * speed * rand(0.3, 1.4),
+        r: rand(0.8, 2.2) * devicePixelRatio,
+        life: rand(60, 180),
+        maxLife: 0,
+        hue: rand(15, 38)
+      };
+    }
+
+    function init() {
+      particles = [];
+      const count = Math.floor((window.innerWidth * window.innerHeight) / 14000);
+      for (let i = 0; i < count; i++) particles.push(createParticle());
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
+
+        if (p.life <= 0 || p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20) {
+          Object.assign(p, createParticle());
+          p.life = rand(60, 180);
+        }
+
+        const alpha = Math.max(0, Math.min(1, p.life / 180));
+        ctx.beginPath();
+        ctx.fillStyle = `hsla(${p.hue}, 100%, 65%, ${alpha})`;
+        ctx.shadowColor = `hsla(${p.hue}, 100%, 65%, ${alpha})`;
+        ctx.shadowBlur = 12 * devicePixelRatio;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (Math.random() > 0.985) {
+          ctx.beginPath();
+          ctx.strokeStyle = `hsla(${p.hue}, 100%, 70%, ${alpha * 0.8})`;
+          ctx.lineWidth = 1 * devicePixelRatio;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x - p.vx * 4, p.y - p.vy * 4);
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", () => {
+      resize();
+      init();
+    });
+
+    resize();
+    init();
+    draw();
+  </script>
+</body>
+</html>
