@@ -156,7 +156,11 @@ h1{
   overflow:hidden;
   text-overflow:ellipsis;
 }
-
+.version{
+  font-size:12px;
+  opacity:0.6;
+  margin-top:4px;
+}
 /* loading bar */
 .loader{
   position:fixed;
@@ -206,34 +210,47 @@ h1{
 
   <div class="grid">
 
-    <div class="mod" onclick="downloadFile('MetalDupe-fabric-1.21.11-V1.4.jar')">
-      <img src="1.png" alt="Metal Dupe">
-      <div class="info">Metals Dupe Mod</div>
+  <div class="mod" onclick="downloadFile('MetalDupe-fabric-1.21.11-V1.4.jar')">
+    <img src="1.png" alt="Metal Dupe">
+    <div class="info">
+      Metals Dupe Mod
+      <div class="version">v1.4</div>
     </div>
-
-    <div class="mod" onclick="downloadFile('Sulfur-optimizations-fabric-1.21.11-1.5.1.jar')">
-      <img src="2.png" alt="Sulfur">
-      <div class="info">Sulfur Optimizations</div>
-    </div>
-
-    <div class="mod" onclick="downloadFile('Meteor_Client-1.21.11-75.jar')">
-      <img src="3.png" alt="Meteor">
-      <div class="info">Meteor Client</div>
-    </div>
-
-    <div class="mod" onclick="downloadFile('glazed-1.21.11-n-16.1.jar')">
-      <img src="4.png" alt="Glazed">
-      <div class="info">Glazed</div>
-    </div>
-
-    <div class="mod" onclick="downloadFile('OpSec-1.0.9.1.jar')">
-      <img src="5.png" alt="OpSec">
-      <div class="info">OpSec</div>
-    </div>
-
   </div>
-</div>
 
+  <div class="mod" onclick="downloadFile('Sulfur-optimizations-fabric-1.21.11-1.5.1.jar')">
+    <img src="2.png" alt="Sulfur">
+    <div class="info">
+      Sulfur Optimizations
+      <div class="version">v1.5.1</div>
+    </div>
+  </div>
+
+  <div class="mod" onclick="downloadFile('Meteor_Client-1.21.11-75.jar')">
+    <img src="3.png" alt="Meteor">
+    <div class="info">
+      Meteor Client
+      <div class="version">v75</div>
+    </div>
+  </div>
+
+  <div class="mod" onclick="downloadFile('glazed-1.21.11-n-16.1.jar')">
+    <img src="4.png" alt="Glazed">
+    <div class="info">
+      Glazed
+      <div class="version">v16.1</div>
+    </div>
+  </div>
+
+  <div class="mod" onclick="downloadFile('OpSec-1.0.9.1.jar')">
+    <img src="5.png" alt="OpSec">
+    <div class="info">
+      OpSec
+      <div class="version">v1.0.9.1</div>
+    </div>
+  </div>
+
+</div>
 <div class="loader"><div class="bar" id="bar"></div></div>
 
 <script>
